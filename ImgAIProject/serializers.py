@@ -4,4 +4,4 @@ from .models import AnimeImage
 class AnimeImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = AnimeImage 
-        fields = ('id', 'image', 'generated_image', 'timestamp')
+        fields = ('id', 'name', 'image', 'generated_image', 'timestamp')
