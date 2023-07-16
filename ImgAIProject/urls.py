@@ -5,5 +5,6 @@ from .views import *
 
 urlpatterns = [
     path('anime-images/', AnimeImageView.as_view()),
-    # otras URLs de tu API
+    path('anime_notes/', NotesAnimeView.as_view()),
+   
 ]

@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import AnimeImage
-from .serializers import AnimeImageSerializer
+from .models import *
+from .serializers import *
 
 class AnimeImageView(APIView):
     def get(self, request):
@@ -16,3 +16,37 @@ class AnimeImageView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class NotesAnimeView(APIView):
+    def get(self, request):
+        notes_anime = NotesAnime.objects.all()
+        serNote = NotesAnimeSerializer(notes_anime, many= True)
+        return Response(serNote.data)
+    
+    def post(self, request):
+        serNote = NotesAnimeSerializer(data=request.data)
+        if serNote.is_valid():
+            serNote.save()
+            return Response(serNote.data, status=status.HTTP_201_CREATED)
+        return Response(serNote.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def put(self, request, animeNotes_id):
+        notes_anime = NotesAnime.objects.get(pk=animeNotes_id)
+        serNote = NotesAnimeSerializer(notes_anime, data= request.data)
+        if serNote.is_valid():
+            serNote.save()
+            return Response(serNote.data)
+        return Response(serNote.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    def delete(self, request, animeNotes_id):
+        notes_anime = NotesAnime.objects.get(pk=animeNotes_id)
+        notes_anime.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    
+    
+
+
+

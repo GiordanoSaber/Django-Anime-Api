@@ -7,6 +7,13 @@ class AnimeImage(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"AnimeImage {self.id}"
+        return f"AnimeImage {self.name}"
 
-        
+
+
+class NotesAnime(models.Model):
+    note_name = models.CharField(max_length=255, blank=True)
+    text_note = models.TextField()
+    def __str__(self):
+        return self.note_name
+    
