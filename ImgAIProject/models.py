@@ -14,6 +14,8 @@ class AnimeImage(models.Model):
 class NotesAnime(models.Model):
     note_name = models.CharField(max_length=255, blank=True)
     text_note = models.TextField()
+    date_note = models.DateField(null=True)
+    
     def __str__(self):
         return self.note_name
     
